@@ -1,5 +1,6 @@
 const axios = require("axios");
 const CryptoData = require("../models/CryptoModel");
+var cron = require('node-cron')
 
 const fetchCryptoData = async () => {
   try {
@@ -18,10 +19,24 @@ const fetchCryptoData = async () => {
 
     const data = response.data;
 
-    console.log(response.data);
+    
+
+    for (const [coin, stats] of Object.entries(data)) {
+      await CryptoData.create({
+          coin,
+          price: stats.usd,
+          marketCap: stats.usd_market_cap,
+          change24h: stats.usd_24h_change,
+      });
+  }
+
+  console.log('Crypto data fetched and stored successfully.');
+
   } catch (error) {
     console.log("Error fetching crypto data", error.message);
   }
 };
+
+cron.schedule('0 */2 * * *', fetchCryptoData);
 
 module.exports = { fetchCryptoData };
