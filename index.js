@@ -14,7 +14,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 
-app.use('/api/crypto', statRoute)
+app.use('/api', statRoute)
+app.use('/api')
 
 
 
