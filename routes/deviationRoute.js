@@ -3,6 +3,6 @@ const router = express.Router()
 const {getCoinDeviation} = require('../controllers/deviationController')
 
 
-router.get('/deviation', getCoinDeviation)
+router.get('/', getCoinDeviation)   
 
 module.exports = router;

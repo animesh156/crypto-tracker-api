@@ -3,6 +3,6 @@ const router = express.Router()
 
 const {getCoinStats} = require('../controllers/statsController')
 
-router.get('/stat', getCoinStats)
+router.get('/', getCoinStats)
 
 module.exports = router
